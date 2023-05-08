@@ -1,0 +1,39 @@
+pipeline:
+  name: java
+  identifier: java
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github
+        repoName: VickyLanz/jhttp
+        build: <+input>
+  stages:
+    - stage:
+        name: Clone Github files
+        identifier: Clone_Github_files
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Arm64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: GitClone
+                  name: GitClone_1
+                  identifier: GitClone_1
+                  spec:
+                    connectorRef: account.Github
+                    repoName: VickyLanz/jhttp
+                    build:
+                      type: branch
+                      spec:
+                        branch: master
